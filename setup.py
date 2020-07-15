@@ -39,7 +39,9 @@ setup(
     author='leowenyang',
 	author_email='leowenyang@163.com',
     tests_require=['pytest'],
-    install_requires=[],
+    install_requires=[
+        "opencv-contrib-python==3.4.0.12",
+    ],
     cmdclass={'test': PyTest},
     description='Automated REST APIs for existing database-driven systems',
     long_description=long_description,
