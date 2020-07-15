@@ -50,7 +50,7 @@ setup(
     classifiers = [
         'Programming Language :: Python',
         'Development Status :: 4 - Beta',
-        'Natural Language :: English',
+        'Natural Language :: Chinese',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
