@@ -10,16 +10,15 @@ import cvman
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-def read(*filenames, **kwargs):
-    encoding = kwargs.get('encoding', 'utf-8')
-    sep = kwargs.get('sep', '\n')
-    buf = []
-    for filename in filenames:
-        with io.open(filename, encoding=encoding) as f:
-            buf.append(f.read())
-    return sep.join(buf)
-
-long_description = read('README.txt', 'CHANGES.txt')
+long_description = """
+FFMPEG wrapper for Python.
+Note that the platform-specific wheels contain the binary executable
+of ffmpeg, which makes this package around 60 MiB in size.
+I guess that's the cost for being able to read/write video files.
+For Linux users: the above is not the case when installing via your
+Linux package manager (if that is possible), because this package would
+simply depend on ffmpeg in that case.
+""".lstrip()
 
 class PyTest(TestCommand):
     def finalize_options(self):
@@ -38,13 +37,13 @@ setup(
     url='https://github.com/leowenyang/cvman',
     license='Apache Software License',
     author='leowenyang',
+	author_email='leowenyang@163.com',
     tests_require=['pytest'],
     install_requires=['Flask>=0.10.1',
                     'Flask-SQLAlchemy>=1.0',
                     'SQLAlchemy==0.8.2',
                     ],
     cmdclass={'test': PyTest},
-    author_email='leowenyang@163.com',
     description='Automated REST APIs for existing database-driven systems',
     long_description=long_description,
     packages=['cvman'],
