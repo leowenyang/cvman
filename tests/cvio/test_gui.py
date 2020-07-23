@@ -1,7 +1,7 @@
 # -*-coding:utf8-*-#
 import pytest
 
-import cvman.cvlib.gui as cvgui
+import cvman.cvio.gui as cvgui
 
 def test_imread():
     # cvgui.namedWindow("test")

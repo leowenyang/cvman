@@ -2,9 +2,9 @@
 import os
 import numpy as np
 
-from cvman.cvlib import gui as cvGui
-from cvman.cvlib import canvas as cvCanvas
-from cvman.cvlib import image as cvImage
+from cvman.cvio import gui as cvGui
+from cvman.cvio import canvas as cvCanvas
+from cvman.cvio import image as cvImage
 
 import cv2
 
@@ -71,7 +71,9 @@ def guessCameraParam(width, height):
     # 0  fy cy
     # 0  0  1
     intrinsic[0, 0] = 4137.8       # fx
+    # intrinsic[0, 0] = 897.8       # fx
     intrinsic[0, 2] = width/2      # cx
+    # intrinsic[1, 1] = 897.3       # fy
     intrinsic[1, 1] = 4147.3       # fy
     intrinsic[1, 2] = height/2     # cy
 
@@ -115,7 +117,7 @@ def getWorldPoints(imgPoint, intrinsic, distortionCoeff, rvec, tvec):
     #                        |1|   |z|
     # 获取图像坐标
     # u,v,1
-    imagePoint = np.ones((3, 1), dtype=np.float32)
+    imagePoint = np.ones((3, 1), dtype=np.float64)
     imagePoint[0, 0] = imgPoint[0]
     imagePoint[1, 0] = imgPoint[1]
     imagePoint = np.mat(imagePoint)
@@ -287,23 +289,33 @@ def calcImage(imgFile):
     print("guess successful")
     # 图像和世界坐标
     # corners = np.zeros((4, 2), np.float32)
-    corners = np.array([
-        (664.0, 497.0),
-        (63.0, 268.0),
-        (451.0, 231.0),
-        (1054.0, 317.0),
-        ], dtype=np.float64)
+    corners = np.array([[
+        [ 664.0, 497.0  ],
+        [ 231.0, 331.0  ],
+        [ 63.0 , 268.0  ],
+        [ 451.0, 231.0  ],
+        [ 667.0, 260.0  ],
+        [ 1054.0, 317.0 ],
+        ]], dtype=np.float64)
     # objRealPoint = np.zeros((4, 3), np.float32)
-    objRealPoint = np.array([
-        ( 0.0, 0.0, 0.0),
-        ( 0.0, 105.0, 0.0),
-        ( 68.0, 105.0, 0.0),
-        ( 68.0, 0.0, 0.0),
-        ], dtype=np.float64)
+    objRealPoint = np.array([[
+        [ 0.0 , 0.0, 0.0   ],
+        [ 0.0 , 52.5, 0.0  ],
+        [ 0.0 , 105.0, 0.0 ],
+        [ 68.0, 105.0, 0.0 ],
+        [ 68.0, 52.5, 0.0  ],
+        [ 68.0, 0.0, 0.0   ],
+        ]], dtype=np.float64)
     print("cal real successful")
+    # # 标定摄像头
+    # print(objRealPoint.shape)
+    # ret, intrinsic, distortionCoeff, rvecs, tvecs = cv2.calibrateCamera(objRealPoint, corners, rgbImage.shape[::-1], None, None)
+    # # 保存并输出参数
+    # outputCameraParam(intrinsic, distortionCoeff, rvecs, tvecs)
+    # return
     # PNP 标定相机
     # SOLVEPNP_ITERATIVE 适合点在同一平面上的情况
-    ret, rvec, tvec = cv2.solvePnP(objRealPoint, corners, intrinsic, distortionCoeff)
+    ret, rvec, tvec = cv2.solvePnP(objRealPoint, corners, intrinsic, distortionCoeff, flags=cv2.SOLVEPNP_ITERATIVE)
     print("calibration successful")
     # 保存并输出参数
     outputCameraParam(intrinsic, distortionCoeff, rvec, tvec)
@@ -316,8 +328,8 @@ def calcImage(imgFile):
     cvGui.waitKey()
 
     # /********图像坐标到世界坐标*******/
-    xe = 488  # 图像中点坐标x
-    ye = 289  # 图像中点坐标y
+    xe = 1054  # 图像中点坐标x
+    ye = 317  # 图像中点坐标y
     #  (488, 289) -> (34, 52.5)
     wP = getWorldPoints((xe, ye), intrinsic, distortionCoeff, rvec, tvec)
 

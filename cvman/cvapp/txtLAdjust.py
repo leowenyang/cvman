@@ -1,9 +1,9 @@
 # -*-coding:utf8-*-#
 import numpy as np
 
-from cvman.cvlib import gui as cvGui
-from cvman.cvlib import canvas as cvCanvas
-from cvman.cvlib import image as cvImage
+from cvman.cvio import gui as cvGui
+from cvman.cvio import canvas as cvCanvas
+from cvman.cvio import image as cvImage
  
 # 度数转换(弧度 -> 度)
 def degreeTrans(theta):
