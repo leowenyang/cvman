@@ -41,7 +41,6 @@ setup(
     tests_require=['pytest'],
     install_requires=[
         "opencv-contrib-python==3.4.0.12",
-        "dlib==19.4.0",
         "numpy==1.18.0",
     ],
     cmdclass={'test': PyTest},

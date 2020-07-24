@@ -21,7 +21,6 @@ class CVCapture():
     CAP_MSMF         = cv2.CAP_MSMF
     CAP_WINRT        = cv2.CAP_WINRT
     CAP_INTELPERC    = cv2.CAP_INTELPERC
-    CAP_REALSENSE    = cv2.CAP_REALSENSE
     CAP_OPENNI2      = cv2.CAP_OPENNI2
     CAP_OPENNI2_ASUS = cv2.CAP_OPENNI2_ASUS
     CAP_GPHOTO2      = cv2.CAP_GPHOTO2
@@ -31,7 +30,6 @@ class CVCapture():
     CAP_ARAVIS       = cv2.CAP_ARAVIS
     CAP_OPENCV_MJPEG = cv2.CAP_OPENCV_MJPEG
     CAP_INTEL_MFX    = cv2.CAP_INTEL_MFX
-    CAP_XINE         = cv2.CAP_XINE
     def __init__(self, filename='', apiPreference=cv2.CAP_ANY):
         # VideoCapture(filename, apiPreference)
         # filename: 
@@ -92,12 +90,6 @@ class CVCapture():
     CAP_PROP_SETTINGS             = cv2.CAP_PROP_SETTINGS
     CAP_PROP_BUFFERSIZE           = cv2.CAP_PROP_BUFFERSIZE
     CAP_PROP_AUTOFOCUS            = cv2.CAP_PROP_AUTOFOCUS
-    CAP_PROP_SAR_NUM              = cv2.CAP_PROP_SAR_NUM
-    CAP_PROP_SAR_DEN              = cv2.CAP_PROP_SAR_DEN
-    CAP_PROP_BACKEND              = cv2.CAP_PROP_BACKEND
-    CAP_PROP_CHANNEL              = cv2.CAP_PROP_CHANNEL
-    CAP_PROP_AUTO_WB              = cv2.CAP_PROP_AUTO_WB
-    CAP_PROP_WB_TEMPERATURE       = cv2.CAP_PROP_WB_TEMPERATURE
     def get(self, propId):
         return self.cap.get(propId)
 
@@ -117,7 +109,7 @@ class CVWriter():
         self.writer.write(frame)
     
     def set(self, propId, value):
-        self.cap.set(propId, value)
+        self.writer.set(propId, value)
 
     def release(self):
         self.writer.release()

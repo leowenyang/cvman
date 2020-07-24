@@ -10,5 +10,17 @@ audio and video tools for all the man to easy use
 # 打包命令
 python setup.py bdist_wheel
 
-# 安装 pip
--i https://pypi.tuna.tsinghua.edu.cn/simple
+# 安装应用
+pip3 install cvman-0.0.1-py3-none-any.whl -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# 代码提交
+采用双线开发 「master」 「develop」
+## develop
+  1. git add .
+  2. git commit -m "XXX"
+  3. git push origin develop
+
+## master
+  1. git checkout master
+  2. git merge develop
+  3. git push origin master
