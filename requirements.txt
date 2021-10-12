@@ -12,4 +12,4 @@ librosa==0.7.1  # via
 moviepy==1.0.1  # via
 dlib==19.4.0    # via
 color_transfer==0.1 # via
-opencv-contrib-python==3.4.0.12  # via
+opencv-contrib-python==4.2.0.32  # via
