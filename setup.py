@@ -40,7 +40,7 @@ setup(
 	author_email='leowenyang@163.com',
     tests_require=['pytest'],
     install_requires=[
-        "opencv-contrib-python==3.4.0.12",
+        "opencv-contrib-python==3.4.7.28",
     ],
     cmdclass={'test': PyTest},
     description='Automated REST APIs for existing database-driven systems',
